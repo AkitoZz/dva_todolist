@@ -1,0 +1,14 @@
+.demo-loadmore-list {
+    min-height: 350px;
+  }
+
+.normal {
+}
+
+.operation a {
+  margin: 0 .5em;
+}
+
+.create {
+  margin: 1.5em 0;
+}  

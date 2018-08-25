@@ -1,8 +1,9 @@
+import Todolist from './components/Todolist';
 
 export default () => {
-    return (
-      <div>
-        todolist
-      </div>
-    )
-  }
+  return (
+    <div>
+      <Todolist />
+    </div>
+  )
+}

@@ -12,9 +12,12 @@ function Header({ location }) {
         <Link to="/"><Icon type="home" />Home</Link>
       </Menu.Item>
       <Menu.Item key="/users">
-        <Link to="/users"><Icon type="bars" />Users</Link>
+        <Link to="/users"><Icon type="user" />Users</Link>
       </Menu.Item>
-      <Menu.Item key="/umi">
+      <Menu.Item key="/todolist">
+        <Link to="/todolist"><Icon type="gift" />Todolist</Link>
+      </Menu.Item>
+      {/* <Menu.Item key="/umi">
         <a href="https://github.com/umijs/umi" target="_blank">umi</a>
       </Menu.Item>
       <Menu.Item key="/dva">
@@ -22,7 +25,8 @@ function Header({ location }) {
       </Menu.Item>
       <Menu.Item key="/404">
         <Link to="/page-you-dont-know"><Icon type="frown-circle" />404</Link>
-      </Menu.Item>
+      </Menu.Item> */}
+      
     </Menu>
   );
 }
