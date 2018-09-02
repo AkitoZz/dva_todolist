@@ -31,6 +31,7 @@ class TodolistModal extends Component {
     const { onOk } = this.props;
     this.props.form.validateFields((err, values) => {
       if (!err) {
+        values['id'] = this.props.record.id
         onOk(values);
         this.hideModelHandler();
       }
@@ -40,8 +41,8 @@ class TodolistModal extends Component {
   render() {
     const { children } = this.props;
     const { getFieldDecorator } = this.props.form;
-    const { title, desp, s_time, e_time } = this.props.record;
-    console.log("title:",title)
+    const { id,title, desp, s_time, e_time } = this.props.record;
+  //  console.log("title:",title)
     const formItemLayout = {
       labelCol: { span: 6 },
       wrapperCol: { span: 14 },
@@ -58,7 +59,7 @@ class TodolistModal extends Component {
           onOk={this.okHandler}
           onCancel={this.hideModelHandler}
         >
-          <Form horizontal onSubmit={this.okHandler}>
+          <Form horizontal onSubmit={this.okHandler} id={id}>
             <FormItem
               {...formItemLayout}
               label="待办事项"

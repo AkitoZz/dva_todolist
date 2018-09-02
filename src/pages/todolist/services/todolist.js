@@ -22,7 +22,7 @@ export function api_todolist(params){
     const token = localStorage.getItem('token')
     return request("http://127.0.0.1:5000/api/v1.0/todolist",{
       method:'POST',
-      body:params.query,
+      body:params,
       headers:{
         token:token
       }

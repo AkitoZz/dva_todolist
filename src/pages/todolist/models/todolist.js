@@ -1,5 +1,6 @@
 import * as todolistServer from '../services/todolist';
 import {message} from 'antd'
+import { create } from 'domain';
 
 export default {
   namespace: 'todolist',
@@ -9,13 +10,17 @@ export default {
   },
   reducers: {
     save(state, { payload: { response } }) {
-      console.log('model_save_resp:',response)
+    //  console.log('model_save_resp:',response)
+    //token过期的errorid,用于顶部导航栏的判断
+      if(response.data.error.error_id === -99){
+        localStorage.setItem('has_login',false)
+      }
       if(response.data.error.error_id !== 0){
         message.error(String(response.data.error.reason))
       }
       else{
         const list = response.data.data
-        console.log('model_save_resp1',list)
+    //    console.log('model_save_resp1',list)
         return { ...state, list };
       }
     },
@@ -36,14 +41,13 @@ export default {
         //  console.log('cookie',cookie)
           if(cookie === ""){
         //    console.log('no token')
-            localStorage.setItem('has_login',false)
           }
           else{
             const token = cookie.split("=")[1].split("|")[0]
         //    console.log('token:',token) 
-            localStorage.setItem('token',token)
             localStorage.setItem('has_login',true)
-            dispatch({ type: 'fetch', payload: {query:{mod:"list"}} });
+            localStorage.setItem('token',token)
+            dispatch({ type: 'fetch', payload: {mod:"list"} });
           }
         //  dispatch({ type: 'fetch', payload: token });
         }

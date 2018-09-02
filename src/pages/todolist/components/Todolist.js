@@ -9,21 +9,53 @@ function Todolist({ dispatch,list,loading }) {
 
     function createHandler(values){
         console.log('create',values,values.range[0].format('YYYY-MM-DD'))
+        dispatch({
+          type:'todolist/fetch',
+          payload:{mod:"create",
+                  title:values.title,
+                  desp:values.desp,
+                  s_time:values.range[0].format('YYYY-MM-DD'),
+                  e_time:values.range[1].format('YYYY-MM-DD'),
+          }
+        })
     }
 
     function editHandler(values){
       console.log('edit',values)
+      dispatch({
+        type:'todolist/fetch',
+        payload:{mod:"edit",
+                id:values.id,
+                title:values.title,
+                desp:values.desp,
+                s_time:values.range[0].format('YYYY-MM-DD'),
+                e_time:values.range[1].format('YYYY-MM-DD'),
+        }
+      })
     }
 
-    function okhandlder(){
-        console.log('ok')
+    function okhandlder(values){
+        console.log('ok',values)
+        dispatch({
+          type:'todolist/fetch',
+          payload:{
+                  mod:'done',
+                  id:values.id
+          }
+        })
     }
 
-    function delhandler(){
-        console.log('del')
+    function delhandler(values){
+        console.log('del',values)
+        dispatch({
+          type:'todolist/fetch',
+          payload:{mod:"delete",
+                  id:values.id,
+          }
+        })
     }
 
-  console.log('1111',list)
+//  console.log('1111',list)
   return (
     <div className={styles.normal}>  
 
@@ -34,14 +66,14 @@ function Todolist({ dispatch,list,loading }) {
     </div>
     <List
     className="demo-loadmore-list"
-//    loading={loading}
+    loading={loading}
     itemLayout="horizontal"
 //    loadMore={loadMore}
     dataSource={list}
     renderItem={item => (
-      <List.Item actions={[<Popconfirm title="真的好好完成了吗" onConfirm={okhandlder}><a>今日打卡</a></Popconfirm>,
+      <List.Item className={item.status ? styles.trBlue : styles.trRed} actions={[<Popconfirm title="真的好好完成了吗" onConfirm={okhandlder.bind(null,item)}><a>今日打卡</a></Popconfirm>,
                             <TodolistModal record={item} onOk={editHandler}><a>编辑</a></TodolistModal>,
-                            <Popconfirm title="真的要放弃吗" onConfirm={delhandler}> <a>删除</a></Popconfirm>]}>
+                            <Popconfirm title="真的要放弃吗" onConfirm={delhandler.bind(null,item)}> <a>删除</a></Popconfirm>]}>
         <List.Item.Meta
           avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
         //  title={<a href="https://ant.design">{item.name.last}</a>}

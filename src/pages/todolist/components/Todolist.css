@@ -12,3 +12,13 @@
 .create {
   margin: 1.5em 0;
 }  
+
+.trRed {
+  background-color: #f6c0d1;
+}
+.trBlue {
+  background-color: #c0e1f6;
+}
+.trGreen {
+  background-color: rgba(152, 248, 157, 0.57);
+}

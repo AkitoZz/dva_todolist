@@ -2,7 +2,7 @@ import { Menu, Icon } from 'antd';
 import Link from 'umi/link';
 
 function Header({ location }) {
-  console.log('header',localStorage,Object.keys(localStorage))
+//  console.log('header',localStorage,Object.keys(localStorage))
   return (
     <Menu
       selectedKeys={[location.pathname]}
