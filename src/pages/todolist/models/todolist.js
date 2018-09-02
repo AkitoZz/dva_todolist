@@ -40,6 +40,7 @@ export default {
           const cookie = document.cookie
         //  console.log('cookie',cookie)
           if(cookie === ""){
+            message.error('请登录')
         //    console.log('no token')
           }
           else{
