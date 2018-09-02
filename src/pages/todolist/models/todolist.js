@@ -1,18 +1,30 @@
-import get_user_info from '../services/todolist';
+import * as todolistServer from '../services/todolist';
+import {message} from 'antd'
 
 export default {
   namespace: 'todolist',
   state: {
-    list:[{"title":"尤克里里","desp":"每天半小时指弹练习","s_time":"2018-08-01","e_time":"8012-08-01"},{"title":"日语学习","desp":"每天学一句日语","s_time":"2018-8-1","e_time":"8012-8-1"}]
+  //  list:[{"title":"尤克里里","desp":"每天半小时指弹练习","s_time":"2018-08-01","e_time":"8012-08-01"},{"title":"日语学习","desp":"每天学一句日语","s_time":"2018-8-1","e_time":"8012-8-1"}]
+    list:[]  
   },
   reducers: {
     save(state, { payload: { response } }) {
-      return { ...state, response };
+      console.log('model_save_resp:',response)
+      if(response.data.error.error_id !== 0){
+        message.error(String(response.data.error.reason))
+      }
+      else{
+        const list = response.data.data
+        console.log('model_save_resp1',list)
+        return { ...state, list };
+      }
     },
   },
   effects: {
     *fetch({ payload }, { call, put }) {
-      const response = yield call(get_user_info);
+    //  console.log('model',payload)
+    //  const response = yield call(todolistServer.api_todolist,payload);
+      const response = yield call(todolistServer.api_todolist,payload) ;
       yield put({ type: 'save', payload: { response } });
     },
   },
@@ -20,7 +32,20 @@ export default {
     setup({ dispatch, history }) {
       return history.listen(({ pathname, query }) => {
         if (pathname === '/todolist') {
-          dispatch({ type: 'fetch', payload: query });
+          const cookie = document.cookie
+        //  console.log('cookie',cookie)
+          if(cookie === ""){
+        //    console.log('no token')
+            localStorage.setItem('has_login',false)
+          }
+          else{
+            const token = cookie.split("=")[1].split("|")[0]
+        //    console.log('token:',token) 
+            localStorage.setItem('token',token)
+            localStorage.setItem('has_login',true)
+            dispatch({ type: 'fetch', payload: {query:{mod:"list"}} });
+          }
+        //  dispatch({ type: 'fetch', payload: token });
         }
       });
     },

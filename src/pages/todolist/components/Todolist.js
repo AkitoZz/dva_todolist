@@ -5,7 +5,7 @@ import styles from './Todolist.css'
 
 //import { PAGE_SIZE } from '../constants';
 
-function Todolist({ list }) {
+function Todolist({ dispatch,list,loading }) {
 
     function createHandler(values){
         console.log('create',values,values.range[0].format('YYYY-MM-DD'))
@@ -62,7 +62,8 @@ function Todolist({ list }) {
 function mapStateToProps(state) {
   const { list } = state.todolist;
   return {
-    list
+    list,
+    loading:state.loading.models.todolist
   };
 }
 
