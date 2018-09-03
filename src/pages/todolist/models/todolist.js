@@ -36,10 +36,12 @@ export default {
   subscriptions: {
     setup({ dispatch, history }) {
       return history.listen(({ pathname, query }) => {
-        if (pathname === '/todolist') {
+        console.log('[debug][start]',pathname)
+        if (pathname === '/todolist/') {
           const cookie = document.cookie
         //  console.log('cookie',cookie)
           if(cookie === ""){
+            localStorage.setItem('has_login',false)
             message.error('请登录')
         //    console.log('no token')
           }

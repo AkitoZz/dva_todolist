@@ -20,7 +20,7 @@ export function fetch({ page = 1 }) {
 export function api_todolist(params){
   //  console.log('service',params)
     const token = localStorage.getItem('token')
-    return request("http://127.0.0.1:5000/api/v1.0/todolist",{
+    return request("http://akazuki.cn/api/v1.0/todolist",{
       method:'POST',
       body:params,
       headers:{

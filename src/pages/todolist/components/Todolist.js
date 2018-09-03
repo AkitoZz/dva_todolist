@@ -75,7 +75,8 @@ function Todolist({ dispatch,list,loading }) {
                             <TodolistModal record={item} onOk={editHandler}><a>编辑</a></TodolistModal>,
                             <Popconfirm title="真的要放弃吗" onConfirm={delhandler.bind(null,item)}> <a>删除</a></Popconfirm>]}>
         <List.Item.Meta
-          avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+        //  avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+          avatar={<Avatar src="/static/10.jpg" height="30" width="30"/>}
         //  title={<a href="https://ant.design">{item.name.last}</a>}
           title={<Tooltip title="业精于勤荒于嬉"><a>{item.title}</a></Tooltip>}
           description={item.desp}
