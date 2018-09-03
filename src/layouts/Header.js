@@ -18,7 +18,7 @@ function Header({ location }) {
       </Menu.Item>
       { 
         
-        localStorage.getItem("has_login") === true ?
+        localStorage.getItem("has_login") === 0 ?
         <Menu.Item key="/">
           <a href="http://akazuki.cn/auth/logout"><Icon type="user" />logout</a>
         </Menu.Item>
